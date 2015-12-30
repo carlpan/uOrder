@@ -26,7 +26,7 @@ SECRET_KEY = '^f%@qx95qa0+opaca9edpk56k-3wh+pot#1ctjan9@hsg-*_k+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'uOrder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,6 +116,9 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Heroku
+#################
+
 # Parse database configuration from $DATABASE_URL
 DATABASES['default'] = dj_database_url.config()
 
@@ -125,6 +128,11 @@ DATABASES['default']['CONN_MAX_AGE'] = 500
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+
+##################
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
