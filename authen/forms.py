@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -46,27 +45,3 @@ class UserForm(forms.ModelForm):
         if password and password != confirm_password:
             self._errors['password'] = self.error_class(['Password don\'t match.'])
         return self.cleaned_data
-
-
-# User Login
-class LoginForm(forms.ModelForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
-                               max_length=30, required=True)
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}),
-                               required=True)
-
-    def clean(self):
-        super(LoginForm, self).clean()
-        username = self.cleaned_data.get('username')
-        password = self.cleaned_data.get('password')
-        user = authenticate(username=username, password=password)
-        if not user or not user.is_active:
-            raise forms.ValidationError("Login was invalid. Please try again.")
-        return self.cleaned_data
-
-    def login(self, request):
-        username = self.cleaned_data.get('username')
-        password = self.cleaned_data.get('password')
-        user = authenticate(username=username, password=password)
-        return user
-
