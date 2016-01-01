@@ -18,6 +18,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^account/', include('authen.urls')),
+    url(r'^', include('core.urls', namespace='core')),
+    url(r'^account/', include('authen.urls', namespace='authen')),
     url(r'^admin/', admin.site.urls),
 ]

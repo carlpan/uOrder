@@ -1,12 +1,17 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
 # User Login
-class LoginForm(forms.ModelForm):
+class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
                                max_length=30, required=True)
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}),
                                required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'password']
 
     def clean(self):
         super(LoginForm, self).clean()

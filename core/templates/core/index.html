@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+<!-- place for block title and head if any -->
+{% block head %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block body %}
+    <div class="container">
+
+        <!-- Login form -->
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+                <!-- Login Panel starts here -->
+                <div class="panel panel-login">
+                    <!-- Panel heading -->
+                    <div class="panel-heading">
+                        <a href="{% url 'core:index' %}" style="color: #029f5b; font-weight: bold; font-size: 18px;">Login</a>
+                        <hr>
+                    </div>
+
+                    <!-- Panel body -->
+                    <div class="panel-body">
+                        <div class="col-lg-12">
+                            <!-- Hidden non-field error window -->
+                            {% if form.non_field_errors %}
+                                {% for error in form.non_field_errors %}
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        {{ error }}
+                                     </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            <!-- Form -->
+                            <form id="login-form" action="{% url 'core:index' %}" method="post" role="form" style="display: block;">
+                                {% csrf_token %}
+                                {% for field in form.visible_fields %}
+                                    <div class="form-group{% if field.errors %} has-error{% endif %}">
+                                        {{ field }}
+                                        {% if field.help_text %}
+                                            <span class="help-block">{{ field.help_text|safe }}</span>
+                                        {% endif %}
+                                        {% for error in field.errors %}
+                                            <label class="control-label">{{ error }}</label>
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                                <div class="form-group text-center">
+                                    <input type="checkbox" class="" name="remember" id="remember">
+                                    <label for="remember">Remember Me</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input type="submit" name="login-submit" id="login-submit" class="form-control btn btn-login" value="Log In">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                Don't have an account!
+                                                <a href="{% url 'authen:register' %}">Sign Up Here</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--<div id="bottom"></div>-->
+
+
+{% endblock body %}

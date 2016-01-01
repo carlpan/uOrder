@@ -15,7 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
 
     <!-- Custom head elements -->
     {% block head %}{% endblock %}
@@ -33,7 +33,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{% url 'home' %}">uOrder</a>
+                    <a class="navbar-brand" href="{% url 'core:home' %}">uOrder</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
@@ -43,12 +43,10 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{% url 'profile_setting' %}">Edit Profile</a></li>
-                                <li><a href="{% url 'account_setting' %}">Settings</a></li>
                                 <li><a href="#">Order History</a></li>
                                 <li><a href="#">Favorite Restaurants</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{% url 'logout' %}">Log Out</a></li>
+                                <li><a href="{% url 'core:logout' %}">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>

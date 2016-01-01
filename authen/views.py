@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 from .forms import UserForm
 
 # Create your views here.
 def register(request):
     if request.method == 'POST':
-        form = UserForm(request.POSt)
+        form = UserForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
@@ -19,7 +20,7 @@ def register(request):
             # Login the user
             login(request, user)
             # To be modified to redirect to home url
-            return redirect('/')
+            return redirect(reverse('core:home'))
     else:
         form = UserForm()
     return render(request, 'authen/register.html', {'form': form})

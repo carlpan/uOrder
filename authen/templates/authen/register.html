@@ -14,7 +14,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3>Sign in</h3>
-                        <div style="float:right; position: relative; top: -30px;"><a id="signinlink" href="#">Sign In</a></div>
+                        <div style="float:right; position: relative; top: -30px;"><a href="{% url 'core:login' %}">Sign In</a></div>
                     </div>
                     <div class="panel-body">
                         <!-- Hidden non-field error window -->
@@ -27,7 +27,7 @@
                             {% endfor %}
                         {% endif %}
 
-                        <form role="form" class="form-horizontal" method="post" action="{% url 'register' %}">
+                        <form role="form" class="form-horizontal" method="post" action="{% url 'authen:register' %}">
                             {% csrf_token %}
                             {% for field in form.visible_fields %}
                                 <div class="form-group{% if field.errors %} has-error{% endif %}">
@@ -42,7 +42,7 @@
                             {% endfor %}
                             <div class="form-group">
                                 <div class="col-sm-6 col-sm-offset-3">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-primary">Sign Up</button>
                                 </div>
                             </div>
                         </form>
