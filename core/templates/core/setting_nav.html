@@ -1,0 +1,6 @@
+<div class="list-group">
+    <a href="{% url 'core:profile_setting' %}"
+       class="list-group-item{% if active == 'profile' %} active{% endif %}">Profile</a>
+    <a href="{% url 'core:account_setting' %}"
+       class="list-group-item{% if active == 'account' %} active{% endif %}">Account</a>
+</div>

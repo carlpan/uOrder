@@ -1,6 +1,5 @@
 body {
     padding-top: 100px;
-    background: url("images/white2.jpg") no-repeat;
 }
 
 body, html {
@@ -61,10 +60,3 @@ body, html {
 	border-color: #53A3CD;
 }
 
-/*
-#bottom {
-    background: url('images/white2.jpg') no-repeat;
-    width: 100%;
-    height: 354px;
-}
-*/
