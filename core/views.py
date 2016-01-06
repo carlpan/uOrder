@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm, ProfileForm, ChangeAccountForm
+from merchants.views import merchants
 
 # Create your views here.
 
@@ -40,7 +41,8 @@ def user_logout(request):
 # Home page upon successful login
 def home(request):
     if request.user.is_authenticated():
-        return render(request, 'core/home.html', {})
+        #return render(request, 'core/home.html', {})
+        return merchants(request)
     else:
         return render(request, 'core/index.html')
 

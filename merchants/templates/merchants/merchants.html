@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+<!-- place for block title and head if any -->
+{% block head %}
+    <link href="{% static 'css/merchants.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block main %}
+
+    <div class="header">
+        <h2>Find Your Restaurant</h2>
+        <p>Pre-order from your favourite restaurants and have them ready in time.</p>
+    </div>
+    <br/>
+    <br/>
+
+    <div class="row">
+        {% for merchant in merchants %}
+           <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <div class="merchant-container">
+                        <h2>{{ merchant.name }}</h2>
+                        <p>{{ merchant.description }}</p>
+                    </div>
+                    <hr>
+                    <div class="merchant-status">
+                        <p>Closed</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        <div class="col-xs-6 col-md-3">
+
+        </div>
+    </div>
+
+
+{% endblock main %}

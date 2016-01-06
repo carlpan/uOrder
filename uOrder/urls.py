@@ -20,5 +20,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^', include('core.urls', namespace='core')),
     url(r'^account/', include('authen.urls', namespace='authen')),
+    url(r'^merchant/', include('merchants.urls', namespace='store')),
     url(r'^admin/', admin.site.urls),
 ]
