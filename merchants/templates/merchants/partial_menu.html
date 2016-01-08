@@ -3,5 +3,36 @@
 <p class="item-description">{{ item.entry_description }}</p>
 <div class="row">
     <p class="item-price pull-left">${{ item.entry_price }}</p>
-    <button type="button" class="btn btn-primary btn-sm pull-right">Add item</button>
+    <button type="button" class="btn btn-primary btn-sm pull-right add-item"
+            data-toggle="modal" data-target="#item-modal-id-{{ item.id }}">
+        Add item
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="item-modal-id-{{ item.id }}" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Add Item to Cart</h4>
+                </div>
+                <div class="modal-body">
+
+
+
+                    {{ item.entry_name }}
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add to Order - ${{ item.entry_price }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

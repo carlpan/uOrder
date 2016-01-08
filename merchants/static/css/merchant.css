@@ -79,7 +79,17 @@ button {
     margin-right: 15px;
 }
 
-.btn {
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn:focus:active
+{
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.add-item {
     border-radius: 20px;
 }
 
