@@ -1,0 +1,88 @@
+.detail-title {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.detail-title h2,
+.detail-title p {
+    display: inline;
+}
+
+.detail-title p {
+    padding-left: 10px;
+    font-size: 20px;
+    color: grey;
+}
+
+.detail-hour {
+    border-radius: 10px;
+    border: 1px solid gainsboro;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+.detail-hour p.hour-title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.detail-hour p.hour-detail {
+    padding-left: 5px;
+}
+
+.detail-hour p {
+    display: inline;
+}
+
+.merchant-status-open {
+    color: green;
+}
+
+.merchant-status-closed {
+    color: red;
+}
+
+.merchant-nav {
+    margin-top: 20px;
+}
+
+.breadcrumb {
+    border-radius: 7px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+/* Merchant Menu Item */
+
+.item-name {
+    font-size:15px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+.item-description {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+}
+.item-price {
+    color: red;
+    margin-left: 15px;
+    margin-bottom: 2px;
+}
+
+button {
+    margin-right: 15px;
+}
+
+.btn {
+    border-radius: 20px;
+}
+
+.popover {
+    background-color: darkgrey;
+}

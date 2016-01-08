@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+<!-- place for block title and head if any -->
+{% block head %}
+    <link href="{% static 'css/merchant.css' %}" rel="stylesheet">
+    <script src="{% static 'js/merchant.js' %}"></script>
+{% endblock head %}
+
+{% block main %}
+
+    <div class="row">
+        <a href="{% url 'store:merchants' %}">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            Back to all restaurants
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="detail-title">
+            <h2>{{ merchant.name }}</h2>
+            <p>{{ merchant.description }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col detail-hour">
+            <p class="hour-title">Hours today:</p>
+            <p class="hour-detail">{{ from_hour }} - {{ to_hour }}</p>
+            (<span class="merchant-status-{% if status %}open{% else %}closed{% endif %}">
+                {% if status %}
+                OPEN
+                {% else %}
+                CLOSED
+                {% endif %}
+            </span>)
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="merchant-nav">
+            <ol class="breadcrumb">
+                <li><a href="#">Items</a></li>
+                <li><a href="#">Rating</a></li>
+                <li><a href="#">Merchant Details</a></li>
+            </ol>
+        </div>
+    </div>
+
+
+    {% block merchant-container %}
+    {% endblock merchant-container %}
+
+    {% for category in categories %}
+    <div class="row">
+        <div class="page-header">
+            <h3>{{ category.name }}</h3>
+        </div>
+
+        {% for item in category.menuitem_set.all %}
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {% include 'merchants/partial_menu.html' with item=item %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+    {% endfor %}
+
+{% endblock main %}

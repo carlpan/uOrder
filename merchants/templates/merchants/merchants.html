@@ -18,7 +18,7 @@
     <div class="row">
         {% for merchant in merchants %}
            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
+                <a href="{% url 'store:merchant' merchant.name.lower merchant.id %}" class="thumbnail">
                     <div class="merchant-container">
                         <h2>{{ merchant.name }}</h2>
                         <p>{{ merchant.description }}</p>
