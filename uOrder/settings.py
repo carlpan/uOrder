@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'core',
     'merchants',
     'menu',
+    'cart',
 ]
 
 MIDDLEWARE_CLASSES = [

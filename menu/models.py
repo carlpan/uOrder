@@ -21,4 +21,3 @@ class MenuItem(models.Model):
 
     def __str__(self):
          return "%s (%s) $%s" % (self.entry_name, self.entry_description, self.entry_price)
-
