@@ -4,6 +4,7 @@
 <!-- place for block title and head if any -->
 {% block head %}
     <link href="{% static 'css/merchant.css' %}" rel="stylesheet">
+    <link href="{% static 'css/additem.css' %}" rel="stylesheet">
     <script src="{% static 'js/merchant.js' %}"></script>
 {% endblock head %}
 
@@ -70,5 +71,7 @@
 
     </div>
     {% endfor %}
+
+    <span id="test">2.2</span>
 
 {% endblock main %}

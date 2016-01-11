@@ -15,14 +15,32 @@ class Cart(models.Model):
         verbose_name = 'cart'
         verbose_name_plural = 'carts'
 
-    def __str__(self):
-        return self.creation_date
+    def __unicode__(self):
+        return unicode(self.creation_date)
+
+    def save(self, *args, **kwargs):
+        self.calculate_cart()
+        super(Cart, self).save(*args, **kwargs)
 
     def get_cart_items(self):
         return self.cartitem_set.all()
 
     def size(self):
-        return len(self.get_cart_items())
+        count = 0
+        for cartitem in self.get_cart_items():
+            count += cartitem.quantity
+        return count
+
+    def create_or_update_cart_item(self, menuitem_pk, quantity=None):
+        menu_item = MenuItem.objects.get(pk=menuitem_pk)
+        cartitem, created = CartItem.objects.get_or_create(cart=self, menu_item=menu_item, quantity=quantity)
+
+        # if cartitem already existed, update its quantity
+        if not created:
+            new_quantity = cartitem.quantity + int(quantity)
+            cartitem.quantity = new_quantity
+            cartitem.save()
+
 
     def calculate_cart(self):
         total = 0
@@ -48,3 +66,5 @@ class CartItem(models.Model):
 
     def get_total_price(self):
         return self.quantity * self.menu_item.entry_price
+
+

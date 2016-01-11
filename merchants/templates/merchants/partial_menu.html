@@ -4,12 +4,12 @@
 <div class="row">
     <p class="item-price pull-left">${{ item.entry_price }}</p>
     <button type="button" class="btn btn-primary btn-sm pull-right add-item"
-            data-toggle="modal" data-target="#item-modal-id-{{ item.id }}">
+            data-toggle="modal" data-target="#{{ item.id }}">
         Add item
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="item-modal-id-{{ item.id }}" tabindex="-1" role="dialog">
+    <div class="modal fade" id="{{ item.id }}" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -20,16 +20,36 @@
                 </div>
                 <div class="modal-body">
 
+                    <div class="header">
+                        <h4>{{ item.entry_name }}</h4>
+                        <p>{{ item.entry_description }}</p>
+                    </div>
 
-
-                    {{ item.entry_name }}
-
-
-
+                    <div class="row">
+                        <form id="add-cart-form-{{ item.id }}" class="add-cart-form" method="post"
+                              action="{% url 'cart:add_cart' %}" role="form" class="form-horizontal">
+                            {% csrf_token %}
+                            <div class="form-group select-quantity">
+                                <label for="quantity-{{ item.id }}">Quantity:</label>
+                                <select name="item_quantity" class="input-sm" id="quantity-{{ item.id }}">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <!-- Hidden inputs -->
+                            <input type="hidden" name="item_id" id="item-id-{{ item.id }}" value="{{ item.id }}" />
+                            <input type="hidden" name="item_price" class="item-price-{{ item.id }}" value="{{ item.entry_price }}" />
+                        </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Add to Order - ${{ item.entry_price }}</button>
+                    <button form="add-cart-form-{{ item.id }}" type="submit" class="btn btn-primary">
+                        Add to Order
+                    </button>
                 </div>
             </div>
         </div>
