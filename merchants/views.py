@@ -11,6 +11,7 @@ def merchants(request):
     all_merchants = Merchant.objects.all()
     return render(request, 'merchants/merchants.html', {'merchants': all_merchants})
 
+@login_required
 def merchant(request, merchant_name, pk):
     merchant = get_object_or_404(Merchant, pk=pk)
 

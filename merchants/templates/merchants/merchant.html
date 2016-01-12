@@ -25,7 +25,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 col detail-hour">
+        <div class="col-md-6 detail-hour">
             <p class="hour-title">Hours today:</p>
             <p class="hour-detail">{{ from_hour }} - {{ to_hour }}</p>
             (<span class="merchant-status-{% if status %}open{% else %}closed{% endif %}">
@@ -36,7 +36,44 @@
                 {% endif %}
             </span>)
         </div>
+
+        <div class="col-md-6">
+            <div class="cart-checkout-buttons pull-right">
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#order-cart-modal">
+                    Order Cart <span id="cart-count"></span>
+                </button>
+
+                <div class="modal fade" id="order-cart-modal" tabindex="-1" role="dialog">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title">Order Cart</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>There are no items.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <a href="#" class="btn btn-success">
+                                    Checkout
+                                </a>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+
+                <a href="#" class="btn btn-success btn-lg pull-right ">
+                    Checkout
+                </a>
+            </div>
+        </div>
     </div>
+
+
+
 
 
     <div class="row">
@@ -71,7 +108,5 @@
 
     </div>
     {% endfor %}
-
-    <span id="test">2.2</span>
 
 {% endblock main %}

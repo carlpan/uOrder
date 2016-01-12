@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Cart(models.Model):
+    user = models.OneToOneField(User, null=True, blank=True)
     creation_date = models.DateTimeField()
     checked_out = models.BooleanField(default=False)
     total = models.DecimalField(default=0.00, max_digits=6, decimal_places=2)
@@ -41,14 +42,16 @@ class Cart(models.Model):
             cartitem.quantity = new_quantity
             cartitem.save()
 
-
     def calculate_cart(self):
         total = 0
-        cart_items = self.get_cart_items()
-        for item in cart_items:
+        for item in self.get_cart_items():
             total += item.get_total_price()
         self.total = total
 
+    def empty_cart(self):
+        if self.id:
+            self.cartitem_set.all().delete()
+            self.delete()
 
 
 class CartItem(models.Model):

@@ -25,9 +25,7 @@ def add_to_cart(request):
         # prepare json for return
         response_data = {}
         response_data['count'] = cart.size()
-        response_data['result'] = 'Create cart successfully!'
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")
     else:
-        return HttpResponse(json.dumps({"nothing to see": "this isn't happening"}),
-                            content_type="application/json")
+        return HttpResponse("")
