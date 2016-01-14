@@ -98,6 +98,14 @@ button {
 }
 
 .cart-checkout-buttons {
-    padding: 0;
-    margin-top: 5px;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.cart-link {
+    margin-right: 5px;
+}
+
+.checkout-link {
+    margin-right: -5px;
 }

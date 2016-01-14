@@ -39,6 +39,12 @@
 
         <div class="col-md-6">
             <div class="cart-checkout-buttons pull-right">
+
+                <a href="{% url 'cart:view_cart' %}" class="btn btn-info btn-lg cart-link">Order Cart</a>
+
+
+                <!-- FOR MODAL CART SHOWING -->
+                <!--
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#order-cart-modal">
                     Order Cart <span id="cart-count"></span>
                 </button>
@@ -64,8 +70,9 @@
                         </div>
                      </div>
                 </div>
+                -->
 
-                <a href="#" class="btn btn-success btn-lg pull-right ">
+                <a href="#" class="btn btn-success btn-lg checkout-link pull-right ">
                     Checkout
                 </a>
             </div>

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from menu.models import MenuItem
 from django.contrib.auth.models import User
+from django.http import Http404
 
 # Create your models here.
 
@@ -42,6 +43,13 @@ class Cart(models.Model):
             cartitem.quantity = new_quantity
             cartitem.save()
 
+    def retrieve_cart_item(self, cartitem_id):
+        try:
+            cartitem = CartItem.objects.get(cart=self, id=cartitem_id)
+        except CartItem.DoesNotExist:
+            raise Http404
+        return cartitem
+
     def calculate_cart(self):
         total = 0
         for item in self.get_cart_items():
@@ -70,4 +78,6 @@ class CartItem(models.Model):
     def get_total_price(self):
         return self.quantity * self.menu_item.entry_price
 
-
+    def update_quantity(self, quantity):
+        self.quantity = quantity
+        self.save()

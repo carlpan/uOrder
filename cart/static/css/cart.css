@@ -1,0 +1,14 @@
+#item-label {
+    font-size: 13px;
+}
+
+.remove-item {
+    color: #bbbbbb;
+    font-size: 0.5em;
+    padding-top: 0.35em;
+    cursor: pointer;
+}
+
+.remove-item:hover {
+    color: #333333;
+}

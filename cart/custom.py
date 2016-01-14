@@ -26,6 +26,7 @@ def create_or_retrieve_cart(request):
     return cart
 
 
+
 '''
 def create_or_retrieve_cart(request):
     cart_id = request.session.get(CART_ID)

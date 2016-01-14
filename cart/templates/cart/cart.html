@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+<!-- place for block title and head if any -->
+{% block head %}
+    <link href="{% static 'css/cart.css' %}" rel="stylesheet">
+    <script src="{% static 'js/cart.js' %}"></script>
+{% endblock head %}
+
+
+{% block main %}
+
+
+    {% if cart and cart.size > 0 %}
+        <form id="updateForm" method="post" action="{% url 'cart:update_cart' %}">
+            {% csrf_token %}
+            {{ ItemQuantityFormSet.management_form }}
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart.get_cart_items %}
+                        <tr id="{{ item.id }}">
+                            <td>
+                                <span id="item-label">[{{ item.menu_item.menu_category }}]</span>
+                                {{ item.menu_item.entry_name }}
+                                <span class="glyphicon glyphicon-remove remove-item"
+                                    title="{% trans 'Click to remove this item' %}"></span>
+                            </td>
+                            <td>
+                                <input style="width: 30px" type=number id="id_form-{{ forloop.counter0 }}-quantity"
+                                       name="form-{{ forloop.counter0 }}-quantity" value="{{ item.quantity }}" />
+                            </td>
+                            <input id="id_form-{{ forloop.counter0 }}-cartitem"
+                                   name="form-{{ forloop.counter0 }}-cartitem" type="hidden" value="{{ item.id }}" />
+                            <td>${{ item.get_total_price|stringformat:"0.02f" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input class="btn btn-primary" type="submit" name="update" form="updateForm"
+                                   value="Update" />
+                        </td>
+                        <td>
+                            <a class="btn btn-success" href="#">Checkout</a>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+
+    {% else %}
+        <div class="row">
+            <div class="col-sm-12">
+                <p>There are no item in the cart.</p>
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock main %}

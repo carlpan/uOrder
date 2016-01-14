@@ -38,7 +38,7 @@ $(function() {
 
             // handle successful response
             success: function(json) {
-                //console.log(json);
+                console.log(json);
                 //console.log(json['count']);
                 //$('#cart-count').html(json.count);
                 $('.modal').modal('hide');
