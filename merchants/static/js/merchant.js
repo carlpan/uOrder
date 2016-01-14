@@ -46,6 +46,21 @@ $(function() {
         });
     });
 
-
+/*
+    $('#order-cart-modal').on('show.bs.modal', function(e) {
+        var link = $(e.relatedTarget);
+        $(this).find('.modal-body').load(link.attr('href'));
+    });
+*/
+/*
+    $('a[data-target=#order-cart-modal]').click(function(e) {
+        e.preventDefault();
+        console.log("here");
+        var target = $(this).attr('href');
+        $(this).find('.modal-body').load(target, function() {
+            $('#order-cart-modal').modal('show');
+        });
+    });
+*/
 });
 

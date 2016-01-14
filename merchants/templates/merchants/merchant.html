@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load i18n %}
 
 <!-- place for block title and head if any -->
 {% block head %}
     <link href="{% static 'css/merchant.css' %}" rel="stylesheet">
     <link href="{% static 'css/additem.css' %}" rel="stylesheet">
     <script src="{% static 'js/merchant.js' %}"></script>
+    <link href="{% static 'css/cart.css' %}" rel="stylesheet">
+    <script src="{% static 'js/cart.js' %}"></script>
 {% endblock head %}
 
 {% block main %}
@@ -47,8 +50,8 @@
                 <!--
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#order-cart-modal">
                     Order Cart <span id="cart-count"></span>
-                </button>
-
+                </button>-->
+                <!--
                 <div class="modal fade" id="order-cart-modal" tabindex="-1" role="dialog">
                      <div class="modal-dialog">
                         <div class="modal-content">
@@ -58,9 +61,7 @@
                                 </button>
                                 <h4 class="modal-title">Order Cart</h4>
                             </div>
-                            <div class="modal-body">
-                                <p>There are no items.</p>
-                            </div>
+                            <div class="modal-body"></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <a href="#" class="btn btn-success">

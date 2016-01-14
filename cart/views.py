@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect
 from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -34,7 +34,7 @@ def add_to_cart(request):
 
         # prepare json for return
         response_data = {}
-        response_data['count'] = cart.size()
+        response_data['count'] = cart.aggregate_cart_size()
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")
     else:
@@ -62,19 +62,21 @@ def update_cart(request):
     ItemQuantityFormSet = formset_factory(UpdateItemQuantityForm, extra=cart_size)
 
     if request.method == 'POST':
-        if 'update' in request.POST:
-            formset = ItemQuantityFormSet(request.POST)
-            if formset.is_valid():
-                # loop each form.cleaned_data in formset.cleaned_data
-                for form in formset:
-                    quantity = form.cleaned_data.get('quantity')
-                    cartitem_id = form.cleaned_data.get('cartitem')
-                    cartitem = cart.retrieve_cart_item(cartitem_id=cartitem_id)
-                    if cartitem.quantity != quantity:
-                        cartitem.update_quantity(quantity)
+        formset = ItemQuantityFormSet(request.POST)
+        if formset.is_valid():
+            # loop each form in formset
+            for form in formset:
+                quantity = form.cleaned_data.get('quantity')
+                cartitem_id = form.cleaned_data.get('cartitem')
+                cartitem = cart.retrieve_cart_item(cartitem_id=cartitem_id)
+                if cartitem.quantity != quantity:
+                    cartitem.update_quantity(quantity)
+            # save the cart update
+            cart.save()
 
-                # save the cart update
-                cart.save()
+    return redirect(reverse('cart:view_cart'))
 
-    return HttpResponseRedirect(reverse('cart:view_cart'))
+
+
+
 

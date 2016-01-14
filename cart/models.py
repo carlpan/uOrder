@@ -28,6 +28,9 @@ class Cart(models.Model):
         return self.cartitem_set.all()
 
     def size(self):
+        return len(self.get_cart_items())
+
+    def aggregate_cart_size(self):
         count = 0
         for cartitem in self.get_cart_items():
             count += cartitem.quantity

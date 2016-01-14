@@ -1,5 +1,4 @@
 $(function() {
-
     $('span.remove-item').click(function() {
         var cartitem = $(this).parents('tr:first').attr('id');
         var here = this;
@@ -20,5 +19,4 @@ $(function() {
             }
         });
     });
-
 });
