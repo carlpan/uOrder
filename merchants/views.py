@@ -9,6 +9,8 @@ from .models import *
 @login_required
 def merchants(request):
     all_merchants = Merchant.objects.all()
+    now = datetime.datetime.now()
+
     return render(request, 'merchants/merchants.html', {'merchants': all_merchants})
 
 @login_required

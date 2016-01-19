@@ -46,13 +46,9 @@ $(function() {
         });
     });
 
-/*
-    $('#order-cart-modal').on('show.bs.modal', function(e) {
-        var link = $(e.relatedTarget);
-        $(this).find('.modal-body').load(link.attr('href'));
-    });
-*/
-/*
+
+
+    /*
     $('a[data-target=#order-cart-modal]').click(function(e) {
         e.preventDefault();
         console.log("here");
@@ -60,7 +56,91 @@ $(function() {
         $(this).find('.modal-body').load(target, function() {
             $('#order-cart-modal').modal('show');
         });
+        var cartModal = $('#order-cart-modal');
+        var modalBody = cartModal.find('.modal-body');
+        modalBody.load(target, function() {
+            cartModal.modal('show');
+        });
     });
-*/
+    */
+
+    $('a[data-target=#order-cart-modal]').click(function(e) {
+        e.preventDefault();
+
+        // get the data target attribute
+        var target_modal = $(e.currentTarget).data('target');
+        // get remote url content
+        var remote_content = e.currentTarget.href;
+
+        // get target modal and its body div
+        var cart_modal = $(target_modal);
+        var modal_body = $(target_modal + ' .modal-body');
+
+        // show the modal with remote url content in body div
+        cart_modal.on('show.bs.modal', function() {
+            modal_body.load(remote_content);
+        }).modal();
+
+        return false;
+    });
+
+
+    $('#order-cart-modal').on('shown.bs.modal', function() {
+
+        $('span.remove-item').on('click', function () {
+            var cartitem = $(this).parents('tr:first').attr('id');
+            var here = this;
+            //console.log(cartitem);
+
+            $.ajax({
+                url: '/cart/remove/',
+                data: {
+                    'cartitem': cartitem
+                },
+                type: 'post',
+                cache: false,
+                success: function (json) {
+                    //console.log('success');
+                    //console.log(json);
+                    $(here).closest('tr').find('td').fadeOut(400, function () {
+                        $(here).parents('tr:first').remove();
+                    });
+
+                    // If cart becomes emtpy, reload the modal
+                    if (json['size'] == 0) {
+                        console.log('becomes empty');
+                        $('#order-cart-modal').fadeOut('slow', function () {
+                            $(this).modal('hide');
+                        }).fadeIn('slow', function() {
+                            $(this).modal('show');
+                        });
+                    }
+                }
+            });
+        });
+
+        $('#updateForm').on('submit', function(e) {
+            e.preventDefault();
+            console.log('here update');
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+
+                success: function(json) {
+                    //console.log(json);
+                    // reload modal content upon update
+                    $('#order-cart-modal').fadeOut('slow', function() {
+                        $(this).modal('hide');
+                    }).fadeIn('slow', function() {
+                        $(this).modal('show');
+                    });
+                }
+            });
+        });
+
+    });
+
 });
 

@@ -23,12 +23,3 @@ a:active {
 hr {
     margin-bottom: 5px !important;
 }
-
-.merchant-status {
-    text-align: center;
-    color: #737373;
-}
-
-.merchant-status p {
-    margin-bottom: 0;
-}

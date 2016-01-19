@@ -2,7 +2,6 @@ import datetime
 
 from .models import Cart
 
-#CART_ID = 'CART_ID'
 
 def get_user_cart(request):
     user = request.user
@@ -24,7 +23,6 @@ def create_or_retrieve_cart(request):
     else:
         cart = create_user_cart(request)
     return cart
-
 
 
 '''

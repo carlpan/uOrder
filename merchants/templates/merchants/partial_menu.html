@@ -41,7 +41,9 @@
                             </div>
                             <!-- Hidden inputs -->
                             <input type="hidden" name="item_id" id="item-id-{{ item.id }}" value="{{ item.id }}" />
-                            <input type="hidden" name="item_price" class="item-price-{{ item.id }}" value="{{ item.entry_price }}" />
+                            <input type="hidden" name="item_price" class="item-price-{{ item.id }}"
+                                   value="{{ item.entry_price }}" />
+                            <input type="hidden" name="merchant_id" value="{{ merchant.id }}" />
                         </form>
                     </div>
                 </div>

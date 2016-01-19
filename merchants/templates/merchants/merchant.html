@@ -8,7 +8,6 @@
     <link href="{% static 'css/additem.css' %}" rel="stylesheet">
     <script src="{% static 'js/merchant.js' %}"></script>
     <link href="{% static 'css/cart.css' %}" rel="stylesheet">
-    <script src="{% static 'js/cart.js' %}"></script>
 {% endblock head %}
 
 {% block main %}
@@ -43,15 +42,17 @@
         <div class="col-md-6">
             <div class="cart-checkout-buttons pull-right">
 
-                <a href="{% url 'cart:view_cart' %}" class="btn btn-info btn-lg cart-link">Order Cart</a>
 
+                <a id="checkout-anchor" href="{% url 'cart:view_cart' %}" class="btn btn-info btn-lg cart-link"
+                   data-toggle="modal" data-target="#order-cart-modal">
+                    Order Cart
+                </a>
 
                 <!-- FOR MODAL CART SHOWING -->
                 <!--
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#order-cart-modal">
                     Order Cart <span id="cart-count"></span>
                 </button>-->
-                <!--
                 <div class="modal fade" id="order-cart-modal" tabindex="-1" role="dialog">
                      <div class="modal-dialog">
                         <div class="modal-content">
@@ -61,7 +62,8 @@
                                 </button>
                                 <h4 class="modal-title">Order Cart</h4>
                             </div>
-                            <div class="modal-body"></div>
+                            <div class="modal-body">
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <a href="#" class="btn btn-success">
@@ -71,11 +73,11 @@
                         </div>
                      </div>
                 </div>
-                -->
 
                 <a href="#" class="btn btn-success btn-lg checkout-link pull-right ">
                     Checkout
                 </a>
+
             </div>
         </div>
     </div>
@@ -108,7 +110,7 @@
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        {% include 'merchants/partial_menu.html' with item=item %}
+                        {% include 'merchants/partial_menu.html' with item=item merchant=merchant %}
                     </div>
                 </div>
             </div>

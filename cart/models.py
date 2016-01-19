@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from menu.models import MenuItem
+from merchants.models import Merchant
 from django.contrib.auth.models import User
 from django.http import Http404
 
@@ -9,6 +10,7 @@ from django.http import Http404
 
 class Cart(models.Model):
     user = models.OneToOneField(User, null=True, blank=True)
+    merchant = models.OneToOneField(Merchant, null=True, blank=True)
     creation_date = models.DateTimeField()
     checked_out = models.BooleanField(default=False)
     total = models.DecimalField(default=0.00, max_digits=6, decimal_places=2)
