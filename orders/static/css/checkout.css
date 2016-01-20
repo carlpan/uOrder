@@ -1,3 +1,27 @@
 .header {
     text-align: center;
 }
+
+#contact-info h3,
+#contact-info a {
+    display: inline;
+}
+
+#info-name {
+    font-weight: bold;
+}
+
+#info-name,
+#info-email {
+    margin-bottom: 3px;
+}
+
+#calculate-cart {
+    font-weight: bold;
+}
+
+#sticky-cart.stick {
+    position: fixed;
+    top: 0;
+    width: 43.7%;
+}

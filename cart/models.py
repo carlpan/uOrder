@@ -26,6 +26,12 @@ class Cart(models.Model):
         self.calculate_cart()
         super(Cart, self).save(*args, **kwargs)
 
+    def get_username(self):
+        return self.user.username
+
+    def get_user_email(self):
+        return self.user.email
+
     def get_cart_items(self):
         return self.cartitem_set.all()
 

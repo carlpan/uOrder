@@ -1,0 +1,105 @@
+
+<!-- Contact info panel -->
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div id="contact-info" class="panel-heading">
+                <h3 class="panel-title">Contact Information</h3>
+                <a href="#" class="pull-right">Edit Info</a>
+            </div>
+            <div class="panel-body">
+                <p id="info-name">{{ cart.get_username }}</p>
+                <p id="info-email">{{ cart.get_user_email }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Open Seats</h3>
+            </div>
+            <div class="panel-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+
+<form role="form" class="form-horizontal" action="{% url 'orders:create_order' %}" method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Your Current Location</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Enter your current location to help us better prepare your food.</p>
+                    <br/>
+                    {{ form.current_location }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+
+
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Estimated Arrival Time</h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        We allow up to 45 minutes prior to arrival to make your order.
+                        Chose your estimated arrival time below.
+                    </p>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-8">
+                            {{ form.arrival_time }}
+                        </div>
+                        <div class="col-md-4">
+                            minutes
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+
+
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Restaurant Instructions</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form.instructions }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-3">
+            <button type="submit" class="btn btn-success btn-lg">Place Order</button>
+        </div>
+    </div>
+
+</form>
+    <br/>
+    <br/>

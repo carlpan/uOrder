@@ -8,20 +8,14 @@ from menu.models import MenuItem
 
 # Create your models here.
 
-ARRIVAL_TIMES = (
-    (1, '10'),
-    (2, '15'),
-    (3, '20'),
-)
-
 class Order(models.Model):
     customer = models.OneToOneField(UserProfile, null=True, blank=True)
     merchant = models.OneToOneField(Merchant, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
-    current_location = models.CharField(max_length=100, null=True, blank=True)
-    arrival_time = models.TimeField(max_length=3, choices=ARRIVAL_TIMES, null=True, blank=True)
+    current_location = models.CharField(max_length=50, null=True, blank=True)
+    arrival_time = models.CharField(max_length=3, null=True, blank=True)
     instructions = models.TextField(null=True, blank=True)
 
     class Meta:

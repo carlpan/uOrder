@@ -27,7 +27,7 @@ def create_order(request):
     else:
         merchant = cart.merchant
         form = CreateOrderForm()
-    return render(request, 'orders/checkout.html', {'form': form, 'merchant': merchant})
+        return render(request, 'orders/checkout.html', {'form': form, 'cart': cart, 'merchant': merchant})
 
 
 
