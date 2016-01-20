@@ -5,23 +5,24 @@ from .models import Cart
 
 def get_user_cart(request):
     user = request.user
-    cart = Cart.objects.get(user=user, checked_out=False)
+    cart = Cart.objects.get(user=user)
     return cart
 
-def create_user_cart(request):
+def create_user_cart(request, merchant):
     cart = Cart(creation_date=datetime.datetime.now())
     cart.user = request.user
+    cart.merchant = merchant
     cart.save()
     return cart
 
-def create_or_retrieve_cart(request):
+def create_or_retrieve_cart(request, merchant):
     if request.user.is_authenticated():
         try:
             cart = get_user_cart(request)
         except Cart.DoesNotExist:
-            cart = create_user_cart(request)
+            cart = create_user_cart(request, merchant)
     else:
-        cart = create_user_cart(request)
+        cart = create_user_cart(request, merchant)
     return cart
 
 

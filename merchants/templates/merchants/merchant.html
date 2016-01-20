@@ -42,8 +42,7 @@
         <div class="col-md-6">
             <div class="cart-checkout-buttons pull-right">
 
-
-                <a id="checkout-anchor" href="{% url 'cart:view_cart' %}" class="btn btn-info btn-lg cart-link"
+                <a id="order-anchor" href="{% url 'cart:view_cart' %}" class="btn btn-info btn-lg cart-link"
                    data-toggle="modal" data-target="#order-cart-modal">
                     Order Cart
                 </a>
@@ -66,7 +65,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <a href="#" class="btn btn-success">
+                                <a href="{% url 'orders:create_order' %}" class="btn btn-success">
                                     Checkout
                                 </a>
                             </div>
@@ -74,7 +73,7 @@
                      </div>
                 </div>
 
-                <a href="#" class="btn btn-success btn-lg checkout-link pull-right ">
+                <a href="{% url 'orders:create_order' %}" class="btn btn-success btn-lg checkout-link pull-right ">
                     Checkout
                 </a>
 

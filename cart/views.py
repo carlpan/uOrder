@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404
 import json
 
-from decorators import ajax_required
 from custom import *
 from .forms import UpdateItemQuantityForm
 from merchants.models import Merchant
@@ -17,20 +16,19 @@ from merchants.models import Merchant
 
 @login_required
 def view_cart(request):
-    cart = create_or_retrieve_cart(request)
-    #cart = get_user_cart(request)
+    try:
+        cart = get_user_cart(request)
+    except Cart.DoesNotExist:
+        cart = None
 
-    cart_size = cart.size()
-    #merchant = cart.merchant
-    ItemQuantityFormSet = formset_factory(UpdateItemQuantityForm, extra=cart_size)
+    if cart:
+        cart_size = cart.size()
+        ItemQuantityFormSet = formset_factory(UpdateItemQuantityForm, extra=cart_size)
 
-    if request.method == 'GET':
-        return redirect(reverse('store:merchants'))
-
-
-    return render(request, 'cart/newcart.html',
-                  {'cart': cart, 'ItemQuantityFormSet': ItemQuantityFormSet})
-
+        return render(request, 'cart/newcart.html',
+                      {'cart': cart, 'ItemQuantityFormSet': ItemQuantityFormSet})
+    else:
+        return render(request, 'cart/newcart.html', {'cart': cart})
 
 @login_required
 def add_to_cart(request):
@@ -40,19 +38,16 @@ def add_to_cart(request):
         merchant_id = request.POST.get('merchant_id')
         merchant = get_object_or_404(Merchant, pk=merchant_id)
 
-        # retrieve cart first
-        '''
-        cart = get_user_cart(request)
-        if cart:
-            # check associated merchant
-            if cart.merchant != merchant:
-                messages.warning(request, 'You current cart will be discarded.')
-                cart.delete()
-                cart = create_user_cart(request, merchant)
-        else:
+        # prevent adding from different merchant
+        try:
+            cart = get_user_cart(request)
+            if cart:
+                if cart.merchant != merchant:
+                    messages.error(request, 'You can\'t add menu item from a different merchant.')
+                    return HttpResponseRedirect(reverse('store:merchant', args=(merchant.name, merchant.id)))
+        except Cart.DoesNotExist:
             cart = create_user_cart(request, merchant)
-        '''
-        cart = create_or_retrieve_cart(request)
+
         cart.create_or_update_cart_item(menuitem_id, quantity)
         cart.save()
 
@@ -68,7 +63,7 @@ def add_to_cart(request):
 @login_required
 @csrf_exempt
 def remove_item(request):
-    cart = create_or_retrieve_cart(request)
+    cart = get_user_cart(request)
     try:
         cartitem_id = request.POST.get('cartitem')
         cartitem = cart.retrieve_cart_item(cartitem_id)
@@ -84,7 +79,7 @@ def remove_item(request):
 
 @login_required
 def update_cart(request):
-    cart = create_or_retrieve_cart(request)
+    cart = get_user_cart(request)
     cart_size = cart.size()
     ItemQuantityFormSet = formset_factory(UpdateItemQuantityForm, extra=cart_size)
 
@@ -106,7 +101,6 @@ def update_cart(request):
             return HttpResponse(json.dumps(response_data), content_type="application/json")
     else:
         return HttpResponse("")
-    #return redirect(reverse('cart:view_cart'))
 
 
 

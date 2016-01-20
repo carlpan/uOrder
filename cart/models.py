@@ -13,7 +13,7 @@ class Cart(models.Model):
     merchant = models.OneToOneField(Merchant, null=True, blank=True)
     creation_date = models.DateTimeField()
     checked_out = models.BooleanField(default=False)
-    total = models.DecimalField(default=0.00, max_digits=6, decimal_places=2)
+    #total = models.DecimalField(default=0.00, max_digits=6, decimal_places=2)
 
     class Meta:
         verbose_name = 'cart'
@@ -59,7 +59,7 @@ class Cart(models.Model):
         total = 0
         for item in self.get_cart_items():
             total += item.get_total_price()
-        self.total = total
+        return total
 
     def empty_cart(self):
         if self.id:

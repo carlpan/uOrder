@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+<!-- place for block title and head if any -->
+{% block head %}
+    <link href="{% static 'css/checkout.css' %}" rel="stylesheet">
+{% endblock head %}
+
+
+{% block main %}
+
+    <div id="main-content">
+    <div class="row">
+        <a href="{% url 'store:merchant' merchant.name merchant.id %}">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            Back to restaurant menu
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="header">
+            <h2>{{ merchant.name }} - Checkout</h2>
+        </div>
+    </div>
+
+    </div>
+{% endblock main %}

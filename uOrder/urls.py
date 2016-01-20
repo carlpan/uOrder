@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^account/', include('authen.urls', namespace='authen')),
     url(r'^merchant/', include('merchants.urls', namespace='store')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
+    url('^order/', include('orders.urls', namespace='orders')),
     url(r'^admin/', admin.site.urls),
 ]

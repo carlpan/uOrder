@@ -85,6 +85,7 @@ $(function() {
     });
 
 
+
     $('#order-cart-modal').on('shown.bs.modal', function() {
 
         $('span.remove-item').on('click', function () {
